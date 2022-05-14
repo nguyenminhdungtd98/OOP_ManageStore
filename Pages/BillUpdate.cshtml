@@ -1,0 +1,51 @@
+﻿@page
+@model DoAnQuanLyCuaHang.Pages.BillUpdateModel
+@{
+}
+<h2>Sửa hóa đơn nhập kho</h2>
+<form class="was-validated" method="post">
+    <div class="form-group">
+        <label for="productNumber">Mã hóa đơn nhập hàng:</label>
+        <input type="number" class="form-control" id="numberBill" name="numberBill" value="@Model.numberBill" readonly>
+    </div>
+    <div class="form-group">
+        <label for="productName">Tên sản phẩm:</label>
+        <select name="productName" id="productName" required>
+            @{
+                if (Model.products.Count > 0)
+                {
+                    for (int i = 0; i < Model.products.Count; i++)
+                    {
+                        <option value="@Model.products[i].productName">@Model.products[i].productName</option>
+                    }
+                }
+            }
+
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="number">Số lượng:</label>
+        <input type="number" class="form-control" id="number" placeholder="Số lượng(Chỉ được nhập số)" name="number" value="@Model.number">
+    </div>
+
+    <div class="form-group">
+        <label for="productType">Loại hàng:</label>
+        <select name="productType" id="productType" required>
+            @{
+                if (Model.productTypes.Count > 0)
+                {
+                    for (int i = 0; i < Model.productTypes.Count; i++)
+                    {
+                        <option value="@Model.productTypes[i].productTypeName">@Model.productTypes[i].productTypeName</option>
+                    }
+                }
+            }
+
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="createDate">Ngày tạo hơn đơn:</label>
+        <input type="datetime" class="form-control" id="createDate" name="createDate" value="@Model.createDate" readonly>
+    </div>
+    <button type="submit" class="btn btn-primary">Nhập hàng vào kho</button>
+</form>

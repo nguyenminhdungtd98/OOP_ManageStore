@@ -1,0 +1,54 @@
+﻿@page
+@model DoAnQuanLyCuaHang.Pages.AddProductModel
+@{
+}
+<form class="was-validated" method="post">
+    <div class="form-group">
+        <label for="productNumber">Mã sản phẩm:</label>
+        <input type="number" class="form-control" id="productNumber" placeholder="Mã sản phẩm(Chỉ được nhập số)" name="productNumber" value="@Model.productNumber" required>
+        <div class="valid-feedback">Valid.</div>
+        <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="form-group">
+        <label for="productName">Tên sản phẩm:</label>
+        <input type="text" class="form-control" id="productName" placeholder="Tên sản phẩm" name="productName" value="@Model.productName" required>
+        <div class="valid-feedback">Valid.</div>
+        <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="form-group">
+        <label for="expireDate">Ngày hết hạn:</label>
+        <input type="datetime-local" id="expireDate" name="expireDate" value="@Model.expireDate" required>
+    </div>
+    <div class="form-group">
+        <label for="company">Tên công ty:</label>
+        <input type="text" class="form-control" id="company" placeholder="Tên Công Ty" name="company" required value="@Model.company">
+        <div class="valid-feedback">Valid.</div>
+        <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="form-group">
+        <label for="dateOfManufacture">Ngày sản xuất:</label>
+        <input type="datetime-local" id="dateOfManufacture" name="dateOfManufacture" value="@Model.dateOfManufacture" required>
+    </div>
+    <div class="form-group">
+        <label for="productType">Loại hàng:</label>
+        <select name="productType" id="productType" required>
+            @{
+                if (Model.productTypes.Count > 0)
+                {
+                    for (int i = 0; i < Model.productTypes.Count; i++)
+                    {
+                        <option value="@Model.productTypes[i].productTypeName">@Model.productTypes[i].productTypeName</option>
+                    }
+                }
+            }
+
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="price">Giá:</label>
+        <input type="text" class="form-control" id="price" placeholder="Giá" name="price" required value="@Model.price">
+        <div class="valid-feedback">Valid.</div>
+        <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
+</form>

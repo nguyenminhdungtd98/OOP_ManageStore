@@ -1,0 +1,96 @@
+﻿@page
+@model DoAnQuanLyCuaHang.Pages.ProductTypeModel
+@{
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col col-md-8">
+            <div style="margin: 10px 10px;">
+                <form method="post" id="frm-add">
+                    <div class="form-inline">
+                        <div>
+                            <select name="typeSearch" id="typeSearch">
+                                <option value="productTypeNumber">Mã loại hàng</option>
+                                <option value="productTypeName">Tên loại hàng</option>
+                            </select>
+                        </div>
+                        <div style="margin-left: 10px !important;">
+                            <input type="text" class="" placeholder="Search" id="key" name="key">
+                        </div>
+                        <div style="margin-left: 10px !important;">
+                            <button type="submit" class="btn-light">Tìm kiếm</button>
+                        </div>
+                        <a href="/ProductType" class="btn btn-primary float-left" style="margin-left:10px;">Tải lại trang</a>
+                    </div>
+                </form>
+
+            </div>
+
+            <div style="height:800px; overflow-y: scroll ;">
+                <table id="dtVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="th-sm">Mã Loại hàng</th>
+                            <th class="th-sm">Tên Loại hàng</th>
+                            <th class="th-sm"></th>
+                            <th class="th-sm"></th>
+                        </tr>
+                    </thead>
+                    @{ 
+                        if (Model.productTypes != null)
+                        {
+                            for (int i = 0; i < Model.productTypes.Count; i++)
+                            {
+                                <tr>
+                                    <td>@Model.productTypes[i].productTypeNumber</td>
+                                    <td>@Model.productTypes[i].productTypeName</td>
+                                    <td>
+                                        <a href="/ProductType?idDelete=@Model.productTypes[i].productTypeNumber">Xóa</a>
+                                    </td>
+                                    <td>
+                                        <a href="/ProductType?idUpdate=@Model.productTypes[i].productTypeNumber">Sửa</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+                </table>
+            </div>
+        </div>
+        <div class="col col-md-4">
+            <form class="was-validated" method="post" style="display: @(!(@Model.idUpdate.Equals(0)) ? "none" : "contents");">
+                <div class="form-group">
+                    <label for="productTypeNumber">Mã loại hàng:</label>
+                    <input type="number" class="form-control" id="productTypeNumber" placeholder="Mã loại hàng(Chỉ được nhập số)" name="productTypeNumber" value="@Model.productTypeNumber" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+                <div class="form-group">
+                    <label for="productTypeName">Tên loại hàng:</label>
+                    <input type="text" class="form-control" id="productTypeName" placeholder="Tên loại hàng" name="productTypeName" value="@Model.productTypeName" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+                <button type="submit" class="btn btn-primary">Thêm loại hàng</button>
+            </form>
+            <form class="was-validated" method="post" style="display: @(!(@Model.idUpdate.Equals(0)) ? "contents" : "none");">
+                <div class="form-group">
+                    <label for="productTypeNumber">Mã loại hàng:</label>
+                    <input type="number" class="form-control" id="productTypeNumber" placeholder="Mã loại hàng(Chỉ được nhập số)" name="productTypeNumber" value="@Model.productTypeNumber" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+                <div class="form-group">
+                    <label for="productTypeName">Tên loại hàng:</label>
+                    <input type="text" class="form-control" id="productTypeName" placeholder="Tên loại hàng" name="productTypeName" value="@Model.productTypeName" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+                <button type="submit" class="btn btn-primary">Sửa loại hàng</button>
+            </form>
+        </div>
+
+    </div>
+
+
+</div>

@@ -1,0 +1,99 @@
+﻿@page
+@model DoAnQuanLyCuaHang.Pages.BillOutModel
+@{
+}
+
+<div class="row">
+    <div class="col col-md-3">
+
+        <form class="was-validated" method="post">
+            <div class="form-group">
+                <label for="productNumber">Mã hóa đơn nhập hàng:</label>
+                <input type="number" class="form-control" id="numberBill" placeholder="Mã sản phẩm(Chỉ được nhập số)" name="numberBill" value="@Model.numberBillOut" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="productName">Tên sản phẩm:</label>
+                <select name="productName" id="productName" required>
+                    @{
+                        if (Model.productsInStock.Count > 0)
+                        {
+                            for (int i = 0; i < Model.productsInStock.Count; i++)
+                            {
+                                <option value="@Model.productsInStock[i].productName">@Model.productsInStock[i].productName</option>
+                            }
+                        }
+                    }
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="number">Số lượng:</label>
+                <input type="number" class="form-control" id="number" placeholder="Số lượng(Chỉ được nhập số)" name="number" value="@Model.number">
+            </div>
+
+            <div class="form-group">
+                <label for="createDate">Ngày tạo hơn đơn:</label>
+                <input type="datetime" class="form-control" id="createDate" name="createDate" value="@Model.createDate" readonly>
+            </div>
+            <button type="submit" class="btn btn-primary">Thêm hoặc chỉnh sửa sản phẩm vào hóa đơn</button>
+
+        </form>
+    </div>
+    <div class="col col-md-9">
+        <div style="height:800px; overflow-y: scroll ;">
+            <form class="was-validated" method="post">
+                <table id="dtVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="th-sm">Mã hóa đơn</th>
+                            <th class="th-sm">Ngày tạo hóa đơn</th>
+                        </tr>
+
+                    </thead>
+                    <tr>
+                        <td>@Model.numberBillOut</td>
+                        <td>@Model.createDate</td>
+                    </tr>
+
+
+                </table>
+                <table id="dtVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                    <thead class="thead-dark">
+                        <tr>
+
+                            <th class="th-sm">Mã Sản Phẩm</th>
+                            <th class="th-sm">Tên Sản Phẩm</th>
+                            <th class="th-sm">Số lượng</th>
+                            <th class="th-sm">Đơn giá</th>
+                            <th class="th-sm">Tổng cộng</th>
+                            <th class="th-sm"></th>
+                        </tr>
+                    </thead>
+                    @{ if (Model.productInBills != null)
+                        {
+                            for (int i = 0; i < Model.productInBills.Count; i++)
+                            {
+                                <tr>
+                                    <td>@Model.productInBills[i].productNumber</td>
+                                    <td>@Model.productInBills[i].productName</td>
+                                    <td>@Model.productInBills[i].number</td>
+                                    <td>@Model.productInBills[i].price</td>
+                                    <td>@Model.productInBills[i].total</td>
+                                    <td>
+                                        <a href="/BillOut?idDeleteP=@Model.productInBills[i].productNumber">Xóa</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                    }
+
+                </table>
+                <label>Đồng ý hoàn tất hóa đơn</label>
+                <input type="checkbox" value="save" id="save" name="save" required />
+                <button type="submit" class="btn btn-primary">Hoàn tất hóa đơn</button>
+            </form>
+        </div>
+    </div>
+</div>
